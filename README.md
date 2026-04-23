@@ -1,12 +1,12 @@
-# Miguel Azevedo Costa | Software Portfolio
+# Miguel Azevedo Costa | Portfólio
 
 Este é o meu portfólio profissional, desenvolvido para centralizar meus projetos, experiências e habilidades técnicas. A interface foi construída com foco em performance, design moderno e interatividade.
 
-**Link do Projeto:** [https://meu-portfolio-tawny-iota.vercel.app/](https://meu-portfolio-tawny-iota.vercel.app/)
+**Link do Projeto:** https://meu-portfolio-tawny-iota.vercel.app/
 
 ---
 
-## Tecnologias e Ferramentas
+## Stack Tecnologica
 
 O projeto utiliza o que há de mais moderno no ecossistema Front-end:
 
@@ -19,12 +19,12 @@ O projeto utiliza o que há de mais moderno no ecossistema Front-end:
 
 ---
 
-## Diferenciais Técnicos
+## Diferenciais Tecnicos
 
-*   **Integração Dinâmica**: O portfólio consome a API do GitHub para exibir meus projetos mais recentes em tempo real.
+*   **Integracao Dinamica**: O portfólio consome a API do GitHub para exibir meus projetos mais recentes em tempo real.
 *   **Arquitetura de Componentes**: Código organizado em componentes reutilizáveis e seguindo boas práticas.
 *   **UX/UI Moderno**: Implementação de modal lightbox, menus interativos e efeitos de scroll.
-*   **Foco em Negócio**: Seção dedicada à metodologia de trabalho (Scrum/ClickUp).
+*   **Foco em Negocio**: Seção dedicada à metodologia de trabalho (Scrum/ClickUp).
 
 ---
 
@@ -42,3 +42,9 @@ npm install
 
 # 4. Inicie o servidor de desenvolvimento
 npm run dev
+Autor
+Miguel Azevedo Costa
+Software Developer na Trezzuri Tecnologia
+LinkedIn: https://www.linkedin.com/in/miguel-costa-051253249/
+GitHub: https://github.com/MAC-2006
+Este projeto está sob a licença MIT.
