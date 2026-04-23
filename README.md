@@ -42,9 +42,3 @@ npm install
 
 # 4. Inicie o servidor de desenvolvimento
 npm run dev
-Autor
-Miguel Azevedo Costa
-Software Developer na Trezzuri Tecnologia
-LinkedIn: https://www.linkedin.com/in/miguel-costa-051253249/
-GitHub: https://github.com/MAC-2006
-Este projeto está sob a licença MIT.
