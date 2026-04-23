@@ -1,7 +1,10 @@
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, Code2, Terminal, Cpu, BookOpen, User, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Linkedin, Mail, ExternalLink, Code2, Terminal, Cpu, BookOpen, User, ChevronRight, Menu, X, Download } from 'lucide-react';
 
 const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // Variantes de Animação
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
@@ -37,7 +40,7 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen selection:bg-emerald-500/30 selection:text-emerald-400">
+    <div className="min-h-screen selection:bg-emerald-500/30 selection:text-emerald-400 bg-[#0b0f1a] text-white">
       
       {/* NAVEGAÇÃO FIXA (GLASSMORPHISM) */}
       <motion.nav 
@@ -48,11 +51,13 @@ const App = () => {
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
           <motion.span 
             whileHover={{ scale: 1.05 }}
-            className="font-black text-2xl tracking-tighter bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent"
+            onClick={() => window.scrollTo(0, 0)}
+            className="font-black text-2xl tracking-tighter bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent cursor-pointer"
           >
             MAC<span className="text-white">.</span>dev
           </motion.span>
           
+          {/* Menu Desktop */}
           <div className="hidden md:flex gap-10 text-xs font-black uppercase tracking-[0.2em]">
             {[
               { name: 'Sobre', href: '#sobre' },
@@ -69,7 +74,45 @@ const App = () => {
               </a>
             ))}
           </div>
+
+          {/* Botão Menu Mobile */}
+          <button 
+            className="md:hidden text-white p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Alternar menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Dropdown Menu Mobile */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-[#0b0f1a] border-b border-white/5 overflow-hidden"
+            >
+              <div className="flex flex-col px-6 py-4 gap-4 text-sm font-black uppercase tracking-[0.2em]">
+                {[
+                  { name: 'Sobre', href: '#sobre' },
+                  { name: 'Habilidades', href: '#skills' },
+                  { name: 'Projetos', href: '#projetos' }
+                ].map((item) => (
+                  <a 
+                    key={item.name} 
+                    href={item.href} 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-slate-400 hover:text-emerald-400 transition-colors py-2"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
       {/* HERO SECTION */}
@@ -77,7 +120,7 @@ const App = () => {
         {/* Efeito de Luz de Fundo */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[150px] rounded-full -z-10" />
         
-        <div className="max-w-6xl mx-auto w-full">
+        <div className="max-w-6xl mx-auto w-full mt-10 md:mt-0">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -110,23 +153,35 @@ const App = () => {
               Unindo software de gestão e sistemas embarcados.
             </p>
             
-            <div className="flex flex-wrap gap-6">
+            <div className="flex flex-wrap gap-4">
               <motion.a 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="https://www.linkedin.com/in/miguel-costa-051253249/" 
                 target="_blank"
-                className="flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold shadow-xl shadow-blue-600/20 transition-all hover:bg-blue-500"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-2xl font-bold shadow-xl shadow-blue-600/20 transition-all hover:bg-blue-500"
               >
-                <Linkedin size={20}/> Conectar no LinkedIn
+                <Linkedin size={20}/> LinkedIn
               </motion.a>
+              
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="/Currículo Miguel.pdf" 
+                download
+                className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 px-6 py-4 rounded-2xl font-bold border border-emerald-500/20 hover:bg-emerald-500/20 transition-all"
+              >
+                <Download size={20}/> Baixar CV
+              </motion.a>
+
               <motion.a 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="#projetos"
-                className="flex items-center gap-3 bg-slate-800 text-white px-8 py-4 rounded-2xl font-bold border border-white/5 hover:bg-slate-700 transition-all"
+                className="flex items-center gap-2 bg-slate-800 text-white px-6 py-4 rounded-2xl font-bold border border-white/5 hover:bg-slate-700 transition-all"
               >
-                Ver Projetos <ChevronRight size={20}/>
+                Projetos <ChevronRight size={20}/>
               </motion.a>
             </div>
           </motion.div>
@@ -185,7 +240,7 @@ const App = () => {
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
             {[
-              { title: "Backend", icons: <Terminal size={24}/>, items: ["Python", "Frappe Framework", "Node.js", "SQL", "APIs REST"], color: "emerald" },
+              { title: "Backend", icons: <Terminal size={24}/>, items: ["Python", "Frappe", "Node.js", "SQL", "APIs REST"], color: "emerald" },
               { title: "Frontend", icons: <Code2 size={24}/>, items: ["React", "JavaScript", "Tailwind CSS", "WordPress"], color: "blue" },
               { title: "Sistemas", icons: <Cpu size={24}/>, items: ["C++", "Arduino/ESP32", "Docker", "Git/GitHub", "Linux"], color: "yellow" }
             ].map((cat) => (
@@ -218,15 +273,15 @@ const App = () => {
               </h2>
               <p className="text-slate-500">Uma seleção dos meus trabalhos recentes</p>
             </div>
-            <a href="https://github.com/MAC-2006" target="_blank" className="text-emerald-400 text-sm font-bold hover:underline flex items-center gap-2">
+            <a href="https://github.com/MAC-2006" target="_blank" rel="noopener noreferrer" className="text-emerald-400 text-sm font-bold hover:underline flex items-center gap-2">
               Ver todos no GitHub <ExternalLink size={16}/>
             </a>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <motion.div
-                key={index}
+                key={project.title}
                 variants={fadeInUp}
                 initial="initial"
                 whileInView="whileInView"
@@ -251,7 +306,7 @@ const App = () => {
                   ))}
                 </div>
                 
-                <a href={project.link} target="_blank" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white group-hover:text-emerald-400 transition-colors">
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white group-hover:text-emerald-400 transition-colors">
                   Detalhes <ExternalLink size={14} />
                 </a>
               </motion.div>
@@ -273,15 +328,17 @@ const App = () => {
             
             <div className="flex justify-center gap-8 pb-20">
               {[
-                { icon: <Mail size={24}/>, href: "mailto:miguelazecosta@gmail.com" },
-                { icon: <Linkedin size={24}/>, href: "https://www.linkedin.com/in/miguel-costa-051253249/" },
-                { icon: <Github size={24}/>, href: "https://github.com/MAC-2006" }
-              ].map((social, i) => (
+                { icon: <Mail size={24}/>, href: "mailto:miguelazecosta@gmail.com", label: "Email" },
+                { icon: <Linkedin size={24}/>, href: "https://www.linkedin.com/in/miguel-costa-051253249/", label: "LinkedIn" },
+                { icon: <Github size={24}/>, href: "https://github.com/MAC-2006", label: "GitHub" }
+              ].map((social) => (
                 <motion.a 
-                  key={i}
+                  key={social.href}
+                  aria-label={social.label}
                   whileHover={{ y: -5, scale: 1.1 }}
                   href={social.href}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="p-5 bg-slate-800/50 rounded-2xl border border-white/5 hover:border-emerald-500/50 hover:text-emerald-400 transition-all"
                 >
                   {social.icon}
