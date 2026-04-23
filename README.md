@@ -6,7 +6,7 @@ Este é o meu portfólio profissional, desenvolvido para centralizar meus projet
 
 ---
 
-##  Tecnologias e Ferramentas
+##  Tecnologias  e Ferramentas
 
 O projeto utiliza o que há de mais moderno no ecossistema Front-end:
 
