@@ -169,7 +169,7 @@ const App = () => {
               
               <motion.a 
                 whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                href="/curriculo.pdf" download
+                href="/Currículo Miguel.pdf" download
                 className="flex justify-center items-center gap-2 bg-emerald-500/10 text-emerald-400 px-6 py-4 rounded-xl font-bold border border-emerald-500/20 w-full md:w-auto"
               >
                 <Download size={20}/> Baixar CV
