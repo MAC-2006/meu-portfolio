@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, ExternalLink, Code2, Terminal, Cpu, BookOpen, User, ChevronRight, Menu, X, Download, Server, GitBranch, LayoutDashboard, CheckCircle2, ZoomIn } from 'lucide-react';
 
+// Linha divisória brilhante
 const SectionDivider = () => (
   <div className="w-full flex items-center justify-center py-10 md:py-16">
     <div className="w-full max-w-2xl h-px bg-gradient-to-r from-transparent via-white/10 to-transparent relative">
@@ -36,7 +37,6 @@ const App = () => {
     whileInView: { transition: { staggerChildren: 0.1 } }
   };
 
-  // Nomes de projetos atualizados para soar mais corporativo e agnóstico
   const fallbackProjects = [
     { name: "Sistemas ERP & Automação", description: "Desenvolvimento de módulos robustos e automação de fluxos corporativos.", topics: ["Python", "MariaDB", "Arquitetura"], html_url: "#" },
     { name: "Integrador de APIs REST", description: "Pontes de dados seguras entre sistemas distintos via Webhooks.", topics: ["Node.js", "Express", "APIs"], html_url: "#" },
@@ -49,7 +49,7 @@ const App = () => {
   return (
     <div className="min-h-screen selection:bg-emerald-500/30 selection:text-emerald-400 bg-[#0b0f1a] text-white overflow-x-hidden">
       
-      {/* MODAL IMAGEM */}
+      {/* MODAL IMAGEM LIGHTBOX */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div 
@@ -59,7 +59,7 @@ const App = () => {
             onClick={() => setSelectedImage(null)}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0b0f1a]/95 backdrop-blur-lg p-4 cursor-zoom-out"
           >
-            <button className="absolute top-4 right-4 md:top-8 md:right-8 text-white/50 hover:text-white bg-slate-800/80 p-3 rounded-full">
+            <button className="absolute top-4 right-4 md:top-8 md:right-8 text-white/50 hover:text-white bg-slate-800/80 p-3 rounded-full transition-colors">
               <X size={24} />
             </button>
             <motion.img 
@@ -68,7 +68,7 @@ const App = () => {
               exit={{ scale: 0.9, y: 20 }}
               src={selectedImage} 
               alt="Ampliada" 
-              className="w-full max-w-5xl max-h-[85vh] object-contain rounded-xl"
+              className="w-full max-w-5xl max-h-[85vh] object-contain rounded-xl shadow-[0_0_50px_rgba(16,185,129,0.15)]"
               onClick={e => e.stopPropagation()}
             />
           </motion.div>
@@ -92,7 +92,7 @@ const App = () => {
           
           <div className="hidden md:flex gap-10 text-xs font-black uppercase tracking-[0.2em]">
             {menuItems.map(item => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="relative group text-slate-400 hover:text-white">
+              <a key={item} href={`#${item.toLowerCase()}`} className="relative group text-slate-400 hover:text-white transition-colors">
                 {item}
                 <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full" />
               </a>
@@ -107,6 +107,7 @@ const App = () => {
           </button>
         </div>
 
+        {/* Dropdown Mobile */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
@@ -121,7 +122,7 @@ const App = () => {
                     key={item} 
                     href={`#${item.toLowerCase()}`} 
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-slate-300 hover:text-emerald-400 py-4 border-b border-white/5 w-full"
+                    className="text-slate-300 hover:text-emerald-400 py-4 border-b border-white/5 w-full transition-colors"
                   >
                     {item}
                   </a>
@@ -138,7 +139,7 @@ const App = () => {
         
         <div className="max-w-6xl mx-auto w-full z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <span className="inline-block py-1.5 px-4 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black tracking-[0.3em] uppercase mb-6 border border-emerald-500/20">
+            <span className="inline-block py-1.5 px-4 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black tracking-[0.3em] uppercase mb-6 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
               Software Developer
             </span>
             
@@ -149,7 +150,6 @@ const App = () => {
               <span className="text-slate-600 break-words">Azevedo Costa</span>
             </h1>
 
-            {/* Texto focado em arquitetura e integração corporativa */}
             <p className="text-base md:text-2xl text-slate-400 max-w-3xl mb-10 leading-relaxed">
               Desenvolvedor <span className="text-white font-semibold">Python</span> e 
               <span className="text-white font-semibold"> JavaScript</span> com foco em 
@@ -158,35 +158,32 @@ const App = () => {
             </p>
             
             <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-              <motion.a 
-                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <a 
                 href="https://www.linkedin.com/in/miguel-costa-051253249/" target="_blank" rel="noopener noreferrer"
-                className="flex justify-center items-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-xl font-bold shadow-lg shadow-blue-600/20 w-full md:w-auto"
+                className="flex justify-center items-center gap-2 bg-blue-600 text-white px-6 py-4 rounded-xl font-bold shadow-lg shadow-blue-600/20 hover:bg-blue-500 hover:-translate-y-1 hover:shadow-blue-600/40 transition-all duration-300 w-full md:w-auto"
               >
                 <Linkedin size={20}/> LinkedIn
-              </motion.a>
+              </a>
               
-              <motion.a 
-                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <a 
                 href="/curriculo.pdf" download
-                className="flex justify-center items-center gap-2 bg-emerald-500/10 text-emerald-400 px-6 py-4 rounded-xl font-bold border border-emerald-500/20 w-full md:w-auto"
+                className="flex justify-center items-center gap-2 bg-emerald-500/10 text-emerald-400 px-6 py-4 rounded-xl font-bold border border-emerald-500/20 hover:bg-emerald-500/20 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300 w-full md:w-auto"
               >
                 <Download size={20}/> Baixar CV
-              </motion.a>
+              </a>
 
-              <motion.a 
-                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              <a 
                 href="#projetos"
-                className="flex justify-center items-center gap-2 bg-slate-800 text-white px-6 py-4 rounded-xl font-bold border border-white/5 w-full md:w-auto"
+                className="flex justify-center items-center gap-2 bg-slate-800 text-white px-6 py-4 rounded-xl font-bold border border-white/5 hover:bg-slate-700 hover:-translate-y-1 hover:border-white/20 transition-all duration-300 w-full md:w-auto"
               >
                 Projetos <ChevronRight size={20}/>
-              </motion.a>
+              </a>
             </div>
           </motion.div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 pb-32">
+      <main className="max-w-6xl mx-auto px-6 pb-20">
         
         {/* SOBRE MIM */}
         <section id="sobre" className="scroll-mt-24 pt-10 md:pt-20">
@@ -197,22 +194,21 @@ const App = () => {
               </h2>
               <div className="space-y-4 text-slate-400 text-sm md:text-lg leading-relaxed">
                 <p>Nascido na <span className="text-white">Etec</span>, aprofundando na <span className="text-white font-bold">Fatec</span> em Sistemas Embarcados.</p>
-                
-                {/* Aqui está a parte que fala da Trezzuri e do fato de ser agnóstico */}
                 <p>No dia a dia, atuo na <span className="text-emerald-400 font-bold">Trezzuri Tecnologia</span>, enfrentando desafios reais em produção e criando integrações que otimizam o core business de clientes do setor corporativo.</p>
                 <p>Construo software com uma base sólida em <span className="text-white font-bold">Lógica, SQL e Design Patterns</span>, o que me permite absorver rapidamente novas linguagens e frameworks em ambientes de grande escala.</p>
               </div>
             </div>
             
             <div className="w-full grid gap-4">
-              <div className="p-6 md:p-8 bg-slate-800/30 rounded-2xl border border-white/5">
-                <BookOpen className="text-blue-400 mb-3" size={24} />
-                <h3 className="text-lg md:text-xl font-bold mb-1">Graduação</h3>
+              {/* Cards com Hover Aprimorado */}
+              <div className="group p-6 md:p-8 bg-slate-800/30 rounded-2xl border border-white/5 hover:border-emerald-500/30 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] transition-all duration-300 cursor-default">
+                <BookOpen className="text-blue-400 mb-3 group-hover:scale-110 transition-transform duration-300" size={24} />
+                <h3 className="text-lg md:text-xl font-bold mb-1 group-hover:text-white transition-colors">Graduação</h3>
                 <p className="text-slate-400 text-xs md:text-sm italic">Sistemas Embarcados - Fatec (24-26)</p>
               </div>
-              <div className="p-6 md:p-8 bg-slate-800/30 rounded-2xl border border-white/5">
-                <Terminal className="text-emerald-400 mb-3" size={24} />
-                <h3 className="text-lg md:text-xl font-bold mb-1">Técnico</h3>
+              <div className="group p-6 md:p-8 bg-slate-800/30 rounded-2xl border border-white/5 hover:border-emerald-500/30 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] transition-all duration-300 cursor-default">
+                <Terminal className="text-emerald-400 mb-3 group-hover:scale-110 transition-transform duration-300" size={24} />
+                <h3 className="text-lg md:text-xl font-bold mb-1 group-hover:text-white transition-colors">Técnico</h3>
                 <p className="text-slate-400 text-xs md:text-sm italic">Informática para Internet - Etec (22-23)</p>
               </div>
             </div>
@@ -240,11 +236,19 @@ const App = () => {
               { title: "DevOps", icon: <Server size={20}/>, items: ["Docker", "Git/GitHub", "Linux", "Nginx"], color: "purple" },
               { title: "Soft Skills", icon: <GitBranch size={20}/>, items: ["Sistemas ERP", "Regras de Negócio", "Integrações B2B"], color: "orange" }
             ].map(cat => (
-              <motion.div key={cat.title} variants={fadeInUp} className="p-6 bg-slate-800/20 rounded-2xl border border-white/5 flex flex-col h-full">
-                <div className={`mb-4 text-${cat.color}-400`}>{cat.icon}</div>
-                <h3 className="text-lg font-bold mb-4 italic">{cat.title}</h3>
+              <motion.div 
+                key={cat.title} 
+                variants={fadeInUp} 
+                className="group p-6 bg-slate-800/20 rounded-2xl border border-white/5 flex flex-col h-full hover:border-emerald-500/30 hover:-translate-y-2 hover:bg-slate-800/40 hover:shadow-[0_10px_30px_rgba(16,185,129,0.05)] transition-all duration-300 cursor-default"
+              >
+                <div className={`mb-4 text-${cat.color}-400 group-hover:scale-110 transition-transform duration-300 origin-left`}>{cat.icon}</div>
+                <h3 className="text-lg font-bold mb-4 italic group-hover:text-white transition-colors">{cat.title}</h3>
                 <div className="flex flex-wrap gap-2 mt-auto">
-                  {cat.items.map(i => <span key={i} className="px-2 py-1 bg-slate-900 rounded text-[10px] md:text-xs text-slate-400 border border-white/5">{i}</span>)}
+                  {cat.items.map(i => (
+                    <span key={i} className="px-2 py-1 bg-slate-900 rounded text-[10px] md:text-xs text-slate-400 border border-white/5 group-hover:border-white/10 transition-colors">
+                      {i}
+                    </span>
+                  ))}
                 </div>
               </motion.div>
             ))}
@@ -262,7 +266,7 @@ const App = () => {
               </h2>
               <p className="text-slate-400 text-sm md:text-lg leading-relaxed mb-6">Trabalho orientado à metodologia <span className="text-white font-bold">Scrum</span> em um ambiente ágil, focado em entregas de alto valor para o cliente.</p>
               <ul className="space-y-3">
-                {["Sprints e Dailys", "Gestão via ClickUp/Jira", "Code Review estruturado e Git Flow"].map((item, idx) => (
+                {["Sprints e Dailys", "Gestão via ClickUp", "Code Review estruturado e Git Flow"].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-slate-300 text-sm md:text-base">
                     <CheckCircle2 className="text-emerald-400 flex-shrink-0" size={18} /> {item}
                   </li>
@@ -270,11 +274,11 @@ const App = () => {
               </ul>
             </div>
 
-            <div className="w-full order-1 md:order-2 group cursor-zoom-in" onClick={() => setSelectedImage('/clickup-print.png')}>
-              <div className="overflow-hidden rounded-xl border border-white/10 bg-[#0b0f1a] p-1.5 shadow-xl relative">
-                <img src="/clickup-print.png" alt="ClickUp" className="w-full h-auto rounded-lg opacity-90 group-hover:opacity-100" />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <ZoomIn size={40} className="text-white" />
+            <div className="w-full order-1 md:order-2 group cursor-zoom-in hover:-translate-y-2 transition-transform duration-500" onClick={() => setSelectedImage('/clickup-print.png')}>
+              <div className="overflow-hidden rounded-xl border border-white/10 bg-[#0b0f1a] p-1.5 shadow-xl relative group-hover:border-emerald-500/30 group-hover:shadow-[0_0_40px_rgba(16,185,129,0.15)] transition-all duration-500">
+                <img src="/clickup-print.png" alt="ClickUp" className="w-full h-auto rounded-lg opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg">
+                  <ZoomIn size={48} className="text-white drop-shadow-lg" />
                 </div>
               </div>
             </div>
@@ -296,16 +300,27 @@ const App = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {displayProjects.map(project => (
-              <motion.div key={project.name} variants={fadeInUp} className="p-6 md:p-8 bg-slate-800/20 rounded-2xl border border-white/5 flex flex-col">
-                <h3 className="text-xl font-black mb-3 text-white capitalize">{project.name.replace(/-/g, ' ')}</h3>
+              <motion.div 
+                key={project.name} 
+                variants={fadeInUp} 
+                className="group p-6 md:p-8 bg-slate-800/20 rounded-2xl border border-white/5 flex flex-col relative overflow-hidden hover:border-emerald-500/40 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(16,185,129,0.1)] transition-all duration-300"
+              >
+                {/* Glow de fundo que aparece no hover */}
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/0 blur-3xl group-hover:bg-emerald-500/20 transition-all duration-500" />
+                
+                <h3 className="text-xl font-black mb-3 text-white capitalize group-hover:text-emerald-400 transition-colors">{project.name.replace(/-/g, ' ')}</h3>
                 <p className="text-slate-400 text-xs md:text-sm mb-6 flex-grow">{project.description || "Projeto em desenvolvimento."}</p>
+                
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.topics?.slice(0,3).map(tag => (
-                    <span key={tag} className="text-[9px] font-black uppercase px-2 py-1 bg-emerald-400/10 text-emerald-400 rounded">{tag}</span>
+                    <span key={tag} className="text-[9px] font-black uppercase px-2 py-1 bg-emerald-400/5 text-emerald-400 rounded border border-emerald-400/10 group-hover:bg-emerald-400/10 transition-colors">
+                      {tag}
+                    </span>
                   ))}
                 </div>
-                <a href={project.html_url} target="_blank" className="flex items-center gap-2 text-xs font-black uppercase text-white hover:text-emerald-400 mt-auto">
-                  Repositório <ExternalLink size={14} />
+                
+                <a href={project.html_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-black uppercase text-white hover:text-emerald-400 mt-auto w-fit z-10 transition-colors">
+                  Repositório <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </a>
               </motion.div>
             ))}
@@ -316,19 +331,37 @@ const App = () => {
         <footer className="pt-20 md:pt-40 text-center relative mt-10">
           <motion.div {...fadeInUp} className="space-y-8">
             <h2 className="text-4xl md:text-7xl font-black">Vamos <span className="text-slate-700">conversar?</span></h2>
-            <div className="flex justify-center gap-4 md:gap-8 pb-10">
+            
+            <div className="flex justify-center gap-4 md:gap-8 pb-6">
               {[
                 { icon: <Mail size={20}/>, href: "mailto:miguelazecosta@gmail.com" },
                 { icon: <Linkedin size={20}/>, href: "https://www.linkedin.com/in/miguel-costa-051253249/" },
                 { icon: <Github size={20}/>, href: "https://github.com/MAC-2006" }
               ].map(social => (
-                <a key={social.href} href={social.href} target="_blank" className="p-4 bg-slate-800/50 rounded-xl border border-white/5 hover:text-emerald-400">
+                <a 
+                  key={social.href} 
+                  href={social.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="p-4 bg-slate-800/50 rounded-xl border border-white/5 hover:border-emerald-500/50 hover:text-emerald-400 hover:-translate-y-2 hover:shadow-[0_10px_20px_rgba(16,185,129,0.15)] transition-all duration-300"
+                >
                   {social.icon}
                 </a>
               ))}
             </div>
+
+            <div className="pt-10 border-t border-white/5 mt-10">
+              <p className="text-[9px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-600 mb-2">
+                Desenvolvido com <span className="text-emerald-500/50">React & Tailwind</span>
+              </p>
+              <p className="text-[10px] md:text-sm text-slate-500">
+                &copy; {new Date().getFullYear()} Miguel Azevedo Costa. Todos os direitos reservados.
+              </p>
+            </div>
+
           </motion.div>
         </footer>
+
       </main>
     </div>
   );
