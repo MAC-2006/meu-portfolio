@@ -36,10 +36,11 @@ const App = () => {
     whileInView: { transition: { staggerChildren: 0.1 } }
   };
 
+  // Nomes de projetos atualizados para soar mais corporativo e agnóstico
   const fallbackProjects = [
-    { name: "Especialista Frappe", description: "Automação de fluxos com Frappe.", topics: ["Python", "MariaDB", "Frappe"], html_url: "#" },
-    { name: "APIs REST", description: "Pontes de dados via Webhooks.", topics: ["Node.js", "Express", "APIs"], html_url: "#" },
-    { name: "IoT Embarcados", description: "Monitoramento industrial Fatec.", topics: ["C++", "ESP32", "MQTT"], html_url: "#" }
+    { name: "Sistemas ERP & Automação", description: "Desenvolvimento de módulos robustos e automação de fluxos corporativos.", topics: ["Python", "MariaDB", "Arquitetura"], html_url: "#" },
+    { name: "Integrador de APIs REST", description: "Pontes de dados seguras entre sistemas distintos via Webhooks.", topics: ["Node.js", "Express", "APIs"], html_url: "#" },
+    { name: "IoT & Sistemas Embarcados", description: "Monitoramento industrial e integração hardware-software (Fatec).", topics: ["C++", "ESP32", "MQTT"], html_url: "#" }
   ];
 
   const displayProjects = githubRepos.length > 0 ? githubRepos : fallbackProjects;
@@ -89,7 +90,6 @@ const App = () => {
             MAC<span className="text-white">.</span>dev
           </motion.span>
           
-          {/* Menu Desktop */}
           <div className="hidden md:flex gap-10 text-xs font-black uppercase tracking-[0.2em]">
             {menuItems.map(item => (
               <a key={item} href={`#${item.toLowerCase()}`} className="relative group text-slate-400 hover:text-white">
@@ -99,7 +99,6 @@ const App = () => {
             ))}
           </div>
 
-          {/* Botão Mobile */}
           <button 
             className="md:hidden text-white p-2 relative z-[60]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -108,7 +107,6 @@ const App = () => {
           </button>
         </div>
 
-        {/* Menu Dropdown Mobile */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
@@ -141,7 +139,7 @@ const App = () => {
         <div className="max-w-6xl mx-auto w-full z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <span className="inline-block py-1.5 px-4 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black tracking-[0.3em] uppercase mb-6 border border-emerald-500/20">
-              Junior Fullstack Developer
+              Software Developer
             </span>
             
             <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black mb-6 tracking-tighter leading-[1]">
@@ -151,13 +149,14 @@ const App = () => {
               <span className="text-slate-600 break-words">Azevedo Costa</span>
             </h1>
 
-            <p className="text-base md:text-2xl text-slate-400 max-w-2xl mb-10 leading-relaxed">
-              Desenvolvedor focado em <span className="text-white font-semibold">Python</span>, 
-              <span className="text-white font-semibold"> JavaScript</span> e arquiteturas para 
-              <span className="text-emerald-400 font-semibold italic"> ERPNext/Frappe</span>.
+            {/* Texto focado em arquitetura e integração corporativa */}
+            <p className="text-base md:text-2xl text-slate-400 max-w-3xl mb-10 leading-relaxed">
+              Desenvolvedor <span className="text-white font-semibold">Python</span> e 
+              <span className="text-white font-semibold"> JavaScript</span> com foco em 
+              <span className="text-emerald-400 font-semibold italic"> arquiteturas escaláveis e integrações corporativas</span>. 
+              Transformando regras de negócio complexas em software de alta performance.
             </p>
             
-            {/* BOTÕES: 100% largura no celular, lado a lado no PC */}
             <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
               <motion.a 
                 whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
@@ -169,7 +168,7 @@ const App = () => {
               
               <motion.a 
                 whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-                href="/Currículo Miguel.pdf" download
+                href="/curriculo.pdf" download
                 className="flex justify-center items-center gap-2 bg-emerald-500/10 text-emerald-400 px-6 py-4 rounded-xl font-bold border border-emerald-500/20 w-full md:w-auto"
               >
                 <Download size={20}/> Baixar CV
@@ -198,7 +197,10 @@ const App = () => {
               </h2>
               <div className="space-y-4 text-slate-400 text-sm md:text-lg leading-relaxed">
                 <p>Nascido na <span className="text-white">Etec</span>, aprofundando na <span className="text-white font-bold">Fatec</span> em Sistemas Embarcados.</p>
-                <p>Atuo na <span className="text-emerald-400 font-bold">Trezzuri Tecnologia</span>, enfrentando desafios reais com Frappe Framework e otimizando o core business de clientes.</p>
+                
+                {/* Aqui está a parte que fala da Trezzuri e do fato de ser agnóstico */}
+                <p>No dia a dia, atuo na <span className="text-emerald-400 font-bold">Trezzuri Tecnologia</span>, enfrentando desafios reais em produção e criando integrações que otimizam o core business de clientes do setor corporativo.</p>
+                <p>Construo software com uma base sólida em <span className="text-white font-bold">Lógica, SQL e Design Patterns</span>, o que me permite absorver rapidamente novas linguagens e frameworks em ambientes de grande escala.</p>
               </div>
             </div>
             
@@ -225,7 +227,7 @@ const App = () => {
             <h2 className="text-3xl md:text-4xl font-black mb-3 flex items-center gap-3 md:justify-center">
               <Cpu className="text-blue-400" size={28} /> 02. Habilidades
             </h2>
-            <p className="text-slate-500 text-sm md:text-base md:text-center">Tecnologias do dia a dia</p>
+            <p className="text-slate-500 text-sm md:text-base md:text-center">Tecnologias e conceitos aplicados em produção</p>
           </motion.div>
 
           <motion.div 
@@ -233,10 +235,10 @@ const App = () => {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
           >
             {[
-              { title: "Backend", icon: <Terminal size={20}/>, items: ["Python", "Frappe", "Node.js", "SQL/MariaDB", "APIs"], color: "emerald" },
+              { title: "Backend", icon: <Terminal size={20}/>, items: ["Python", "Node.js", "SQL/MariaDB", "APIs REST", "POO"], color: "emerald" },
               { title: "Frontend", icon: <Code2 size={20}/>, items: ["React", "JavaScript", "Tailwind", "HTML/CSS"], color: "blue" },
               { title: "DevOps", icon: <Server size={20}/>, items: ["Docker", "Git/GitHub", "Linux", "Nginx"], color: "purple" },
-              { title: "Soft Skills", icon: <GitBranch size={20}/>, items: ["ERP", "Regras de Negócio", "Integrações"], color: "orange" }
+              { title: "Soft Skills", icon: <GitBranch size={20}/>, items: ["Sistemas ERP", "Regras de Negócio", "Integrações B2B"], color: "orange" }
             ].map(cat => (
               <motion.div key={cat.title} variants={fadeInUp} className="p-6 bg-slate-800/20 rounded-2xl border border-white/5 flex flex-col h-full">
                 <div className={`mb-4 text-${cat.color}-400`}>{cat.icon}</div>
@@ -258,9 +260,9 @@ const App = () => {
               <h2 className="text-3xl md:text-4xl font-black mb-6 flex items-center gap-3">
                 <LayoutDashboard className="text-purple-400" size={28} /> 03. Metodologia
               </h2>
-              <p className="text-slate-400 text-sm md:text-lg leading-relaxed mb-6">Trabalho orientado à metodologia <span className="text-white font-bold">Scrum</span>, garantindo entregas contínuas.</p>
+              <p className="text-slate-400 text-sm md:text-lg leading-relaxed mb-6">Trabalho orientado à metodologia <span className="text-white font-bold">Scrum</span> em um ambiente ágil, focado em entregas de alto valor para o cliente.</p>
               <ul className="space-y-3">
-                {["Sprints e Dailys", "Gestão via ClickUp", "Code Review estruturado"].map((item, idx) => (
+                {["Sprints e Dailys", "Gestão via ClickUp/Jira", "Code Review estruturado e Git Flow"].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-slate-300 text-sm md:text-base">
                     <CheckCircle2 className="text-emerald-400 flex-shrink-0" size={18} /> {item}
                   </li>
@@ -288,7 +290,7 @@ const App = () => {
               <h2 className="text-3xl md:text-4xl font-black mb-2 flex items-center gap-3">
                 <Code2 className="text-emerald-400" size={28} /> 04. Projetos
               </h2>
-              <p className="text-slate-500 text-sm">Sincronizado com o GitHub</p>
+              <p className="text-slate-500 text-sm">Sincronizado automaticamente com o GitHub</p>
             </div>
           </motion.div>
 
@@ -296,7 +298,7 @@ const App = () => {
             {displayProjects.map(project => (
               <motion.div key={project.name} variants={fadeInUp} className="p-6 md:p-8 bg-slate-800/20 rounded-2xl border border-white/5 flex flex-col">
                 <h3 className="text-xl font-black mb-3 text-white capitalize">{project.name.replace(/-/g, ' ')}</h3>
-                <p className="text-slate-400 text-xs md:text-sm mb-6 flex-grow">{project.description || "Projeto focado em automação."}</p>
+                <p className="text-slate-400 text-xs md:text-sm mb-6 flex-grow">{project.description || "Projeto em desenvolvimento."}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.topics?.slice(0,3).map(tag => (
                     <span key={tag} className="text-[9px] font-black uppercase px-2 py-1 bg-emerald-400/10 text-emerald-400 rounded">{tag}</span>
