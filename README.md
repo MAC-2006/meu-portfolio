@@ -1,12 +1,12 @@
-# 🚀 Miguel Azevedo Costa | Software Portfolio
+# Miguel Azevedo Costa | Software Portfolio
 
 Este é o meu portfólio profissional, desenvolvido para centralizar meus projetos, experiências e habilidades técnicas. A interface foi construída com foco em performance, design moderno (Glassmorphism) e interatividade.
 
-**🔗 Acesse o Portfólio:** [https://meu-portfolio-tawny-iota.vercel.app/](https://meu-portfolio-tawny-iota.vercel.app/)
+** Acesse o Portfólio:** [https://meu-portfolio-tawny-iota.vercel.app/](https://meu-portfolio-tawny-iota.vercel.app/)
 
 ---
 
-## 🛠️ Tecnologias e Ferramentas
+##  Tecnologias e Ferramentas
 
 O projeto utiliza o que há de mais moderno no ecossistema Front-end:
 
@@ -19,7 +19,7 @@ O projeto utiliza o que há de mais moderno no ecossistema Front-end:
 
 ---
 
-## ✨ Diferenciais Técnicos
+##  Diferenciais Técnicos
 
 - **Integração Dinâmica**: O portfólio não é estático. Ele consome a API do GitHub para exibir meus projetos mais recentes. Se eu criar um repositório novo hoje, ele aparece no site automaticamente.
 - **Arquitetura de Componentes**: Código organizado em componentes reutilizáveis, seguindo boas práticas de Clean Code.
@@ -28,7 +28,7 @@ O projeto utiliza o que há de mais moderno no ecossistema Front-end:
 
 ---
 
-## ⚙️ Como rodar o projeto localmente
+##  Como rodar o projeto localmente
 
 ```bash
 # 1. Clone este repositório
