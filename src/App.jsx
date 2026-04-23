@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, Code2, Terminal, Cpu, BookOpen, User, ChevronRight, Menu, X, Download, Server, GitBranch, LayoutDashboard, CheckCircle2, ZoomIn } from 'lucide-react';
+import { Github, Linkedin, Mail, ExternalLink, Code2, Terminal, Cpu, BookOpen, User, ChevronRight, Menu, X, Download, Server, GitBranch, LayoutDashboard, CheckCircle2, ZoomIn, Globe } from 'lucide-react';
 
 // Linha divisória brilhante
 const SectionDivider = () => (
@@ -17,12 +17,20 @@ const App = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    fetch('https://api.github.com/users/MAC-2006/repos?sort=updated&per_page=3')
-      .then(res => res.json())
+    // Busca repositórios - DICA: Adicione "portfolio" como tópico no GitHub para filtrar se quiser
+    fetch('https://api.github.com/users/MAC-2006/repos?sort=updated&per_page=6')
+      .then(res => res.ok ? res.json() : [])
       .then(data => {
-        if (Array.isArray(data)) setGithubRepos(data);
+        if (Array.isArray(data)) {
+          // Filtra para remover forks e garantir que apareçam os melhores
+          const mainRepos = data.filter(repo => !repo.fork).slice(0, 3);
+          setGithubRepos(mainRepos);
+        }
       })
-      .catch(err => console.error("Erro API GitHub", err));
+      .catch(err => {
+        console.error("Erro API GitHub", err);
+        setGithubRepos([]);
+      });
   }, []);
 
   const fadeInUp = {
@@ -38,9 +46,27 @@ const App = () => {
   };
 
   const fallbackProjects = [
-    { name: "Sistemas ERP & Automação", description: "Desenvolvimento de módulos robustos e automação de fluxos corporativos.", topics: ["Python", "MariaDB", "Arquitetura"], html_url: "#" },
-    { name: "Integrador de APIs REST", description: "Pontes de dados seguras entre sistemas distintos via Webhooks.", topics: ["Node.js", "Express", "APIs"], html_url: "#" },
-    { name: "IoT & Sistemas Embarcados", description: "Monitoramento industrial e integração hardware-software (Fatec).", topics: ["C++", "ESP32", "MQTT"], html_url: "#" }
+    { 
+      name: "Sistemas ERP & Automação", 
+      description: "Desenvolvimento de módulos robustos e automação de fluxos corporativos na Trezzuri.", 
+      topics: ["Python", "MariaDB", "Arquitetura"], 
+      html_url: "https://github.com/MAC-2006",
+      homepage: "https://meu-portfolio-tawny-iota.vercel.app/" 
+    },
+    { 
+      name: "Integrador de APIs REST", 
+      description: "Pontes de dados seguras entre sistemas distintos via Webhooks.", 
+      topics: ["Node.js", "Express", "APIs"], 
+      html_url: "https://github.com/MAC-2006",
+      homepage: null 
+    },
+    { 
+      name: "IoT & Sistemas Embarcados", 
+      description: "Monitoramento industrial e integração hardware-software (Fatec).", 
+      topics: ["C++", "ESP32", "MQTT"], 
+      html_url: "https://github.com/MAC-2006",
+      homepage: null 
+    }
   ];
 
   const displayProjects = githubRepos.length > 0 ? githubRepos : fallbackProjects;
@@ -84,7 +110,7 @@ const App = () => {
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
           <motion.span 
             whileHover={{ scale: 1.05 }}
-            onClick={() => window.scrollTo(0, 0)}
+            onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
             className="font-black text-2xl tracking-tighter bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent cursor-pointer relative z-[60]"
           >
             MAC<span className="text-white">.</span>dev
@@ -200,7 +226,6 @@ const App = () => {
             </div>
             
             <div className="w-full grid gap-4">
-              {/* Cards com Hover Aprimorado */}
               <div className="group p-6 md:p-8 bg-slate-800/30 rounded-2xl border border-white/5 hover:border-emerald-500/30 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] transition-all duration-300 cursor-default">
                 <BookOpen className="text-blue-400 mb-3 group-hover:scale-110 transition-transform duration-300" size={24} />
                 <h3 className="text-lg md:text-xl font-bold mb-1 group-hover:text-white transition-colors">Graduação</h3>
@@ -276,7 +301,7 @@ const App = () => {
 
             <div className="w-full order-1 md:order-2 group cursor-zoom-in hover:-translate-y-2 transition-transform duration-500" onClick={() => setSelectedImage('/clickup-print.png')}>
               <div className="overflow-hidden rounded-xl border border-white/10 bg-[#0b0f1a] p-1.5 shadow-xl relative group-hover:border-emerald-500/30 group-hover:shadow-[0_0_40px_rgba(16,185,129,0.15)] transition-all duration-500">
-                <img src="/clickup-print.png" alt="ClickUp" className="w-full h-auto rounded-lg opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500" />
+                <img src="/clickup-print.png" alt="ClickUp Workflow" className="w-full h-auto rounded-lg opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg">
                   <ZoomIn size={48} className="text-white drop-shadow-lg" />
                 </div>
@@ -294,8 +319,11 @@ const App = () => {
               <h2 className="text-3xl md:text-4xl font-black mb-2 flex items-center gap-3">
                 <Code2 className="text-emerald-400" size={28} /> 04. Projetos
               </h2>
-              <p className="text-slate-500 text-sm">Sincronizado automaticamente com o GitHub</p>
+              <p className="text-slate-500 text-sm">Sincronizado via GitHub API (v3)</p>
             </div>
+            <a href="https://github.com/MAC-2006" target="_blank" rel="noopener noreferrer" className="text-xs font-black uppercase text-slate-400 hover:text-white flex items-center gap-2 transition-colors">
+              Ver todos no GitHub <ExternalLink size={14}/>
+            </a>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -305,23 +333,34 @@ const App = () => {
                 variants={fadeInUp} 
                 className="group p-6 md:p-8 bg-slate-800/20 rounded-2xl border border-white/5 flex flex-col relative overflow-hidden hover:border-emerald-500/40 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(16,185,129,0.1)] transition-all duration-300"
               >
-                {/* Glow de fundo que aparece no hover */}
                 <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/0 blur-3xl group-hover:bg-emerald-500/20 transition-all duration-500" />
                 
-                <h3 className="text-xl font-black mb-3 text-white capitalize group-hover:text-emerald-400 transition-colors">{project.name.replace(/-/g, ' ')}</h3>
-                <p className="text-slate-400 text-xs md:text-sm mb-6 flex-grow">{project.description || "Projeto em desenvolvimento."}</p>
+                <h3 className="text-xl font-black mb-3 text-white capitalize group-hover:text-emerald-400 transition-colors">
+                  {project.name.replace(/-/g, ' ')}
+                </h3>
+                <p className="text-slate-400 text-xs md:text-sm mb-6 flex-grow">
+                  {project.description || "Explorando novas fronteiras tecnológicas e arquiteturas de software."}
+                </p>
                 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.topics?.slice(0,3).map(tag => (
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {(project.topics?.length > 0 ? project.topics.slice(0,3) : ["Dev", "Software"]).map(tag => (
                     <span key={tag} className="text-[9px] font-black uppercase px-2 py-1 bg-emerald-400/5 text-emerald-400 rounded border border-emerald-400/10 group-hover:bg-emerald-400/10 transition-colors">
                       {tag}
                     </span>
                   ))}
                 </div>
                 
-                <a href={project.html_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-black uppercase text-white hover:text-emerald-400 mt-auto w-fit z-10 transition-colors">
-                  Repositório <ExternalLink size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </a>
+                <div className="flex items-center gap-6 mt-auto">
+                  <a href={project.html_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-black uppercase text-white hover:text-emerald-400 z-10 transition-colors">
+                    GitHub <Github size={14} className="group-hover:translate-x-0.5 transition-transform" />
+                  </a>
+                  
+                  {project.homepage && (
+                    <a href={project.homepage} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-black uppercase text-emerald-400 hover:text-white z-10 transition-colors">
+                      Demo <Globe size={14} className="group-hover:rotate-12 transition-transform" />
+                    </a>
+                  )}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -355,7 +394,7 @@ const App = () => {
                 Desenvolvido com <span className="text-emerald-500/50">React & Tailwind</span>
               </p>
               <p className="text-[10px] md:text-sm text-slate-500">
-                &copy; {new Date().getFullYear()} Miguel Azevedo Costa. Todos os direitos reservados.
+                &copy; {new Date().getFullYear()} Miguel Azevedo Costa.
               </p>
             </div>
 
