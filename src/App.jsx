@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, ExternalLink, Code2, Terminal, Cpu, BookOpen, User, ChevronRight, Menu, X, Download, Server, GitBranch, LayoutDashboard, CheckCircle2, ZoomIn, Globe } from 'lucide-react';
-
+import { 
+  Github, Linkedin, Mail, ExternalLink, Code2, Terminal, Cpu, 
+  BookOpen, User, ChevronRight, Menu, X, Download, Server, 
+  GitBranch, LayoutDashboard, CheckCircle2, ZoomIn, Globe, 
+  MessageCircle // Adicione este aqui
+} from 'lucide-react';
 // Linha divisória brilhante
 const SectionDivider = () => (
   <div className="w-full flex items-center justify-center py-10 md:py-16">
@@ -192,6 +196,13 @@ const App = () => {
               </a>
               
               <a 
+                href="https://wa.me/5511985857366" target="_blank" rel="noopener noreferrer"
+                className="flex justify-center items-center gap-2 bg-emerald-600 text-white px-6 py-4 rounded-xl font-bold shadow-lg shadow-emerald-600/20 hover:bg-emerald-500 hover:-translate-y-1 hover:shadow-emerald-600/40 transition-all duration-300 w-full md:w-auto"
+              >
+                <MessageCircle size={20}/> WhatsApp
+              </a>
+
+              <a 
                 href="/Currículo Miguel.pdf" download
                 className="flex justify-center items-center gap-2 bg-emerald-500/10 text-emerald-400 px-6 py-4 rounded-xl font-bold border border-emerald-500/20 hover:bg-emerald-500/20 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300 w-full md:w-auto"
               >
@@ -375,7 +386,8 @@ const App = () => {
               {[
                 { icon: <Mail size={20}/>, href: "mailto:miguelazecosta@gmail.com" },
                 { icon: <Linkedin size={20}/>, href: "https://www.linkedin.com/in/miguel-costa-051253249/" },
-                { icon: <Github size={20}/>, href: "https://github.com/MAC-2006" }
+                { icon: <Github size={20}/>, href: "https://github.com/MAC-2006" },
+                { icon: <MessageCircle size={20}/>, href: "https://wa.me/5511985857366" }
               ].map(social => (
                 <a 
                   key={social.href} 
