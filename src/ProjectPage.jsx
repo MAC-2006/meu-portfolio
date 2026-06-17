@@ -56,7 +56,7 @@ const fadeInDelay = (delay) => ({
 
 export default function ProjectPage() {
   const { slug } = useParams();
-  const { lang } = useLang();
+  const { lang, setLang } = useLang();
   const tx = tPage[lang];
 
   const project = projects.find((p) => p.slug === slug);
@@ -88,19 +88,25 @@ export default function ProjectPage() {
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-600/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
 
       {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 bg-[#0b0f1a]/90 backdrop-blur-xl border-b border-white/5">
+        <nav className="fixed top-0 w-full z-50 bg-[#0b0f1a]/90 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link
+            <Link
             to="/"
             className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest"
-          >
+            >
             <ArrowLeft size={16} /> {tx.back}
-          </Link>
-          <span className="font-black text-xl tracking-tighter bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
+            </Link>
+            <span className="font-black text-xl tracking-tighter bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
             MAC<span className="text-white">.</span>dev
-          </span>
+            </span>
+            <button
+            onClick={() => setLang(lang === 'en' ? 'pt' : 'en')}
+            className="text-xs font-black uppercase tracking-widest px-3 py-1.5 rounded-lg border border-white/10 text-slate-400 hover:text-white hover:border-emerald-500/50 transition-all duration-200"
+            >
+            {lang === 'en' ? 'PT' : 'EN'}
+            </button>
         </div>
-      </nav>
+        </nav>
 
       <main className="max-w-5xl mx-auto px-6 pt-36 pb-28">
 

@@ -175,8 +175,8 @@ const Home = () => {
       .catch(() => setGithubRepos([]));
   }, []);
 
-  const displayProjects = staticProjects.map((sp, i) => {
-    const gh = githubRepos[i];
+  const displayProjects = staticProjects.map((sp) => {
+    const gh = githubRepos.find(r => r.name === sp.slug);
     return gh
       ? { ...sp, name: gh.name.replace(/-/g, ' '), shortDescription: gh.description || sp.shortDescription, tags: gh.topics?.length ? gh.topics.slice(0, 3) : sp.tags, github: gh.html_url, demo: gh.homepage || sp.demo }
       : sp;
@@ -440,8 +440,8 @@ const Home = () => {
               <motion.div key={project.slug} variants={fadeInUp}
                 className="group p-6 md:p-8 bg-slate-800/20 rounded-2xl border border-white/5 flex flex-col relative overflow-hidden hover:border-emerald-500/40 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(16,185,129,0.1)] transition-all duration-300">
                 <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/0 blur-3xl group-hover:bg-emerald-500/20 transition-all duration-500" />
-                <h3 className="text-xl font-black mb-3 text-white capitalize group-hover:text-emerald-400 transition-colors">{project.name}</h3>
-                <p className="text-slate-400 text-xs md:text-sm mb-6 flex-grow">{project.shortDescription}</p>
+                <h3 className="text-xl font-black mb-3 text-white capitalize group-hover:text-emerald-400 transition-colors">{project[`name_${lang}`] || project.name}</h3>
+                <p className="text-slate-400 text-xs md:text-sm mb-6 flex-grow">{project[`shortDescription_${lang}`] || project.shortDescription}</p>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {project.tags.map(tag => (
                     <span key={tag} className="text-[9px] font-black uppercase px-2 py-1 bg-emerald-400/5 text-emerald-400 rounded border border-emerald-400/10 group-hover:bg-emerald-400/10 transition-colors">{tag}</span>
