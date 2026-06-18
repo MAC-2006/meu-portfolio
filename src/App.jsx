@@ -307,8 +307,11 @@ const Home = () => {
                 className="flex justify-center items-center gap-2 bg-emerald-600 text-white px-6 py-4 rounded-xl font-bold shadow-lg shadow-emerald-600/20 hover:bg-emerald-500 hover:-translate-y-1 hover:shadow-emerald-600/40 transition-all duration-300 w-full md:w-auto">
                 <MessageCircle size={20} /> {tx.btnWhatsapp}
               </a>
-              <a href="/Resume Miguel.pdf" download
-                className="flex justify-center items-center gap-2 bg-emerald-500/10 text-emerald-400 px-6 py-4 rounded-xl font-bold border border-emerald-500/20 hover:bg-emerald-500/20 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300 w-full md:w-auto">
+              <a 
+                href={lang === 'pt' ? "/Currículo Miguel.pdf" : "/Resume Miguel.pdf"} 
+                download
+                className="flex justify-center items-center gap-2 bg-emerald-500/10 text-emerald-400 px-6 py-4 rounded-xl font-bold border border-emerald-500/20 hover:bg-emerald-500/20 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300 w-full md:w-auto"
+              >
                 <Download size={20} /> {tx.btnCV}
               </a>
               <a href="#projects"
