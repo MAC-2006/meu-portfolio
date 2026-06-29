@@ -167,19 +167,29 @@ const Home = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    fetch('https://api.github.com/users/MAC-2006/repos?sort=updated&per_page=6')
+    fetch('https://api.github.com/users/MAC-2006/repos?sort=updated&per_page=100')
       .then(res => (res.ok ? res.json() : []))
       .then(data => {
-        if (Array.isArray(data)) setGithubRepos(data.filter(r => !r.fork).slice(0, 3));
+        if (Array.isArray(data)) setGithubRepos(data.filter(r => !r.fork));
       })
       .catch(() => setGithubRepos([]));
   }, []);
 
+  // Merge defensivo: o GitHub enriquece os dados, mas NUNCA sobrescreve
+  // github nem demo do staticProject com valores vazios/nulos.
   const displayProjects = staticProjects.map((sp) => {
     const gh = githubRepos.find(r => r.name === sp.slug);
-    return gh
-      ? { ...sp, name: gh.name.replace(/-/g, ' '), shortDescription: gh.description || sp.shortDescription, tags: gh.topics?.length ? gh.topics.slice(0, 3) : sp.tags, github: gh.html_url, demo: gh.homepage || sp.demo }
-      : sp;
+    if (!gh) return sp;
+
+    return {
+      ...sp,
+      name: gh.name.replace(/-/g, ' '),
+      shortDescription: gh.description || sp.shortDescription,
+      tags: gh.topics?.length ? gh.topics.slice(0, 5) : sp.tags,
+      // Só substitui se o valor do GitHub for uma string não-vazia
+      github: gh.html_url || sp.github,
+      demo: gh.homepage || sp.demo,
+    };
   });
 
   const menuItems = [
@@ -451,11 +461,13 @@ const Home = () => {
                   ))}
                 </div>
                 <div className="flex items-center gap-6 mt-auto">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-[10px] font-black uppercase text-white hover:text-emerald-400 z-10 transition-colors"
-                    onClick={e => e.stopPropagation()}>
-                    GitHub <Github size={14} />
-                  </a>
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-[10px] font-black uppercase text-white hover:text-emerald-400 z-10 transition-colors"
+                      onClick={e => e.stopPropagation()}>
+                      GitHub <Github size={14} />
+                    </a>
+                  )}
                   {project.demo && (
                     <a href={project.demo} target="_blank" rel="noopener noreferrer"
                       className="flex items-center gap-2 text-[10px] font-black uppercase text-emerald-400 hover:text-white z-10 transition-colors"

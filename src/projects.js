@@ -40,8 +40,8 @@ export const projects = [
     ],
 
     tags: ['Python', 'FastAPI', 'RAG', 'React', 'Qdrant'],
-    github: 'https://github.com/MAC-2006',
-    demo: 'https://meu-portfolio-tawny-iota.vercel.app/',
+    github: 'https://github.com/MAC-2006/IA_contextualizada',
+    demo: 'https://ia-contextualizada.vercel.app/',
 
     // ── PT ──────────────────────────────────────────────────────────
     name_pt: 'ProMind — Plataforma de IA Contextual',
@@ -105,7 +105,7 @@ export const projects = [
     ],
 
     tags: ['Flask', 'Python', 'Multi-tenant', 'PostgreSQL', 'PDF'],
-    github: 'https://github.com/MAC-2006',
+    github: 'https://github.com/MAC-2006/metrotecnica',
     demo: 'https://metrotecnica.vercel.app/',
 
     // ── PT ──────────────────────────────────────────────────────────
